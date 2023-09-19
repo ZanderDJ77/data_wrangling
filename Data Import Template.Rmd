@@ -5,6 +5,8 @@ output: github_document
 
 ```{r}
 library(tidyverse)
+library(readxl)
+library(haven)
 ```
 
 Let's import the 'FAS_litters.csv' csv using a relative path
@@ -72,6 +74,51 @@ str(litters_df)
 
 skimr::skim(litters_df)
 
+```
+
+## Options in 'Read_*'
+
+```{r}
+litters_df_skipped =
+  read_csv("Data/FAS_litters.csv",
+           skip = 10, col_names = FALSE)
+```
+
+Looking at NA Values
+
+```{r}
+litters_df =
+  read_csv("Data/FAS_litters.csv",
+           na = c("NA", 19))
+```
+
+Column Types
+
+```{r}
+litters_df = 
+  read_csv("Data/FAS_Litters.csv",
+           col_types = 
+             cols(
+               `GD0 weight` = col_character()
+             ))
+litters_df
+```
+
+#Other File Types
+
+Importing a xlsx file first
+
+```{r}
+mlb_df =
+  read_excel("Data/mlb11.xlsx")
+mlb_df
+```
+
+Importing a SAS File
+
+```{r}
+pulse_df = 
+  read_sas("Data/public_pulse_data.sas7bdat")
 
 ```
 
