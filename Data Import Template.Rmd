@@ -1,0 +1,77 @@
+---
+title: "Simple document"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+Let's import the 'FAS_litters.csv' csv using a relative path
+
+```{r}
+litters_df =
+  read_csv("Data/FAS_litters.csv")
+
+#Cleaning the column names and standardizing organization
+litters_df =
+  janitor::clean_names(litters_df)
+
+litters_df
+
+```
+
+Import the dataset using an absolute path. But relative paths are much stronger because they do not change if the files are moved around on your computer.
+
+```{r, eval = FALSE}
+litters_df_abs =
+  read_csv("~/Desktop/GitHub Example/Data Wrangling Lesson/Data/FAS_litters.csv")
+
+#Cleaning the column names and standardizing organization
+litters_df_abs =
+  janitor::clean_names(litters_df_abs)
+
+litters_df_abs
+
+```
+
+Learning Assessment 
+
+```{r}
+pups_df =
+  read_csv("Data/FAS_pups.csv")
+
+pups_df =
+  janitor::clean_names(pups_df)
+
+pups_df
+```
+
+## Looking at data
+
+```{r}
+litters_df
+
+#These functions bring you to the top and bottom of a dataframe 
+head(litters_df)
+tail(litters_df)
+
+```
+
+You can use 'View' for the entire dataset. Better to use separately in a consoline line command and not knit into an R Markdown file 
+
+```{r, eval = FALSE}
+view(litters_df)
+
+```
+
+Look at a Data Summary
+
+```{r}
+str(litters_df)
+
+skimr::skim(litters_df)
+
+
+```
+
