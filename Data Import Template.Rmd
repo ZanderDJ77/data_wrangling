@@ -122,3 +122,24 @@ pulse_df =
 
 ```
 
+
+## Base R Functions ....
+Do not use less functionality
+```{r, eval = FALSE}
+litters_df =
+  read.csv("Data/FAS_Litters.csv")
+```
+
+Writing and Exporting new data 
+```{r}
+litters_df_cleaned = 
+  read_csv("Data/FAS_litters.csv")
+
+litters_df_cleaned = 
+  janitor::clean_names(litters_df_cleaned)
+
+write_csv(litters_df_cleaned, "Data/litters_cleaned.csv")
+
+
+```
+

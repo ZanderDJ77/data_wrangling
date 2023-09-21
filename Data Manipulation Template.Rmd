@@ -1,0 +1,84 @@
+---
+title: "Data Manipulation"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(haven)
+```
+
+Import FAS Litters and Pups 
+
+```{r}
+litters_df =
+  read_csv("Data/FAS_litters.csv")
+litters_df = janitor::clean_names(litters_df)
+
+pups_df =
+  read_csv("data/FAS_pups.csv")
+pups_df = janitor::clean_names(pups_df)
+
+```
+
+Selecting Particular Columns with the `Select` Function
+
+```{r}
+select(litters_df, group, litter_number, gd0_weight)
+
+select(litters_df,gd0_weight, group)
+
+select(litters_df, group, gd0_weight:gd_of_birth)
+
+select(litters_df, group, starts_with("pups"))
+
+#Removing column presentation in a query with the subtract function 
+
+select(litters_df, -litter_number)
+
+select(litters_df, -starts_with("gd"))
+
+select(litters_df, group, litter_id = litter_number)
+
+select(litters_df, group, litter_id = litter_number, everything())
+
+select(litters_df, gd0_weight, everything())
+
+```
+
+
+`Select` vs. `Pull`
+```{r}
+select(litters_df, group)
+#Pull removes this column as a vector rather than making a sub dataframe like the select function
+pull(litters_df, group) 
+#If you want to manipulate something outside of the dataframe, use pull
+```
+
+Learning Assessment: In the pups data, select the columns containing litter number, sex, and PD ears.
+
+```{r}
+view(pups_df)
+
+select(pups_df, litter_number, sex, pd_ears)
+
+```
+
+## Filter 
+Getting rid of rows using `filter()`
+
+```{r}
+filter(litters_df, group == "Con7")
+#Two equal sign means to check to see if equation is true and will do the operation whenever it is true
+
+filter(litters_df, group == "Mod8")
+
+# != is a not equal operation check
+
+filter(litters_df, gd0_weight > 20)
+
+filter(litters_df, group %in% c("Con7", "Con8"), gd0_weight > 20)
+
+```
+
