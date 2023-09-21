@@ -82,3 +82,33 @@ filter(litters_df, group %in% c("Con7", "Con8"), gd0_weight > 20)
 
 ```
 
+
+
+
+## Mutate Function
+This is used to add or change Variables
+
+```{r}
+mutate(litters_df, wt_gain = gd18_weight - gd0_weight)
+
+mutate(litters_df, group = str_to_lower(group))
+
+mutate(
+  litters_df,
+  wt_gain = gd18_weight - gd0_weight,
+  group = str_to_lower(group)
+)
+
+```
+
+What about Missign Rows
+
+Drop NA Function
+
+```{r}
+drop_na(litters_df)
+#Either everywhere above, or by specific column
+drop_na(litters_df, gd0_weight)
+```
+
+
